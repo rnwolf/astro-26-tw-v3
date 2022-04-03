@@ -7,7 +7,7 @@ export default defineConfig({
   integrations: [
     tailwind({
       config: {
-        applyBaseStyles: true,
+        applyBaseStyles: false,
       },
     }),
   ],
