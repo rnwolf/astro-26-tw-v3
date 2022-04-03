@@ -1,7 +1,35 @@
 # Astro Starter Kit: Minimal
 
+With Tailwindcss and custom style modifications
+
+Created as follows:
+
 ```
-npm init astro -- --template minimal
+mkdir astro-26-tw-v3
+cd astro-26-tw-v3
+npm init astro
+
+Select minimal
+
+npm install
+npx astro add tailwind
+
+modify index.astro to add some Tailwindcss classes
+
+Update the astro.config.mjs intrgrations with
+    tailwind({config: { applyBaseStyles: false },})
+
+Add global.css and import to index.astro
+
+git init
+git add -A
+git commit -m "Initial commit"
+gh repo create
+
+
+npm run dev
+
+Works fine.
 ```
 
 [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/minimal)
@@ -32,7 +60,7 @@ Any static assets, like images, can be placed in the `public/` directory.
 All commands are run from the root of the project, from a terminal:
 
 | Command           | Action                                       |
-|:----------------  |:-------------------------------------------- |
+| :---------------- | :------------------------------------------- |
 | `npm install`     | Installs dependencies                        |
 | `npm run dev`     | Starts local dev server at `localhost:3000`  |
 | `npm run build`   | Build your production site to `./dist/`      |
