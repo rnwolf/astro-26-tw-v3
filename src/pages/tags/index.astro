@@ -14,9 +14,10 @@ for (postkey in allPosts) {
 }
 allPosts = postAry;
 
-//** const tags = [...new Set([].concat.apply([],allPosts.map(post => post.tags)))] **//
+const tags = [...new Set([].concat.apply([],allPosts.map(post => post.frontmatter.tags)))]
 
-console.log(allPosts)
+console.log(tags)
+
 ---
 
 <html lang="en">
@@ -28,13 +29,13 @@ console.log(allPosts)
     <br>
 
     <h1>Tags</h1>
-    <!-- <div style="display: flex; flex-wrap: wrap; margin: 0 auto">
+    <div style="display: flex; flex-wrap: wrap; margin: 0 auto">
         {tags.sort().map((tag) => (
             <p style="padding: .5em 1em; margin: 0.25em; font-size:1.15em; background-color:#F8FCFD; border: dotted 1px #a1a1a1; border-radius:.5em;" >
             <a href={`/tags/${tag}`}>{tag}</a>
             </p>
         ))}
-    </div> -->
+    </div>
     </main>
     </body>
 </html>
