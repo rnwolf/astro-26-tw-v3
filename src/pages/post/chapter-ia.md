@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/post.astro
-title: Chapter I
-tags: ["movie","bother"]
+title: Chapter IA
+tags: ["movie", "world"]
 date: 2021-05-2
 image: /images/chapter-01.jpg
 author: don

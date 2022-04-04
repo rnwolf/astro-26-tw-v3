@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/post.astro
-title: Chapter III
-tags: ["movie", "other"]
+title: Chapter IIIA
+tags: ["movie", "hello"]
 date: 2021-05-19
 image: /images/chapter-03.jpg
 author: don

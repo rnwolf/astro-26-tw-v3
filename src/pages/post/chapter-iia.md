@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/post.astro
-title: Chapter II
-tags: ["movie", "other"]
+title: Chapter IIA
+tags: ["movie", "some"]
 date: 2021-05-18
 image: /images/chapter-02.jpg
 author: sancho
