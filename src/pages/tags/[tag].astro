@@ -1,0 +1,74 @@
+---
+import MainHead from '../../components/MainHead.astro';
+import Nav from '../../components/Nav.astro';
+import PostPreview from '../../components/PostPreview.astro';
+import Pagination from '../../components/Pagination.astro';
+import authorData from '../../data/authors.json';
+
+export async function getStaticPaths() {
+
+	let allPosts = await Astro.glob('../post/*.md');
+
+	let postAry = [];
+	for (postkey in allPosts) {
+	let currentPost = allPosts[postkey];
+	postAry.push({
+		frontmatter: currentPost.frontmatter,
+		url: currentPost.url
+	});
+	}
+	allPosts = postAry;
+
+	const allTagsUnique = [...new Set([].concat.apply([],allPosts.map(post => post.frontmatter.tags)))]
+
+	return allTagsUnique.map((tag) => ({ params: { tag }, props: { allPosts } }));
+}
+
+console.log(Astro.params.tag)
+
+/** filter posts by tag, sort by date */
+// const posts = allPosts.filter((post) => post.frontmatter.tags === Astro.params.tag).sort((a, b) => new Date(b.frontmatter.date).valueOf() - new Date(a.frontmatter.date).valueOf());
+
+// page
+const title = 'Don’s Blog';
+const description = 'An example blog on Astro';
+const { canonicalURL } = Astro;
+// const { page } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<title>{title}</title>
+		<!-- <MainHead {title} {description} image={page.data[0].frontmatter.image} canonicalURL={canonicalURL.toString()} prev={page.url.prev} next={page.url.next} /> -->
+
+		<style lang="scss">
+			.title {
+				font-size: 3em;
+				letter-spacing: -0.04em;
+				margin-top: 2rem;
+				margin-bottom: 0;
+				text-align: center;
+			}
+
+			.count {
+				font-size: 1em;
+				display: block;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<Nav {title} />
+
+		<main class="wrapper">
+			<h2 class="title">All Posts</h2>
+			<!-- <small class="count">{page.start + 1}–{page.end + 1} of {page.total}</small> -->
+			<!-- {page.data.map((post) => <PostPreview post={post} author={authorData[post.frontmatter.author]} />)} -->
+		</main>
+
+		<footer>
+			<!-- <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} /> -->
+		</footer>
+	</body>
+</html>
