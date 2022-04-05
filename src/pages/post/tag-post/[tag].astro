@@ -1,22 +1,7 @@
 ---
-
-
-export async function getStaticPaths() {
-  let allPosts = await Astro.glob('../../post/*.md');
-  // const allTags = new Set()
-  // allPosts.map(post => {
-  //     post.frontmatter.tags && post.frontmatter.tags.map(tag => allTags.add(tag.toLowerCase()))
-  // })
-  // return Array.from(allTags).map((tag) => {
-  //   const filteredPosts = allPosts.filter((post) => post.frontmatter.tags.includes(tag))
-  //   return {
-  //     params: { tag },
-  //     props: {
-  //         pages: filteredPosts
-  //     }
-  //   };
-  // });
-
+export async function getStaticPaths () {
+  // grab all .md files from a folder
+  let allPosts = await Astro.glob('../*.md');
   // I need this filter to ignore files that they do not have 
   // a title, or no published date (in frontmatter)
   // this way I leave the date out while the post is not finished.
@@ -45,7 +30,6 @@ export async function getStaticPaths() {
     });
   }
   return ary;
-
 }
 
 // grab the selected tag from the url (dynamic [tag])
@@ -53,7 +37,7 @@ const tagname = Astro.params.tag;
 const tagcount = Astro.props.count;
 // These section feels duplicated from getStaticPaths()
 // opportunity to refactor...
-let allPosts = await Astro.glob('../../post/*.md');
+let allPosts = await Astro.glob('../*.md');
 let filteredPosts = 
     allPosts.filter((p) => { 
       return p.frontmatter.title && p.frontmatter.date; 
@@ -64,38 +48,22 @@ let tagged = filteredPosts.filter((p) => {
   return p.frontmatter.tags.includes(tagname); 
 });
 
-console.log('ran page')
 ---
-
-
-<html lang="en">
-	<head>
+<html>
+    <head>
     </head>
-    <body>
-    <main>
-    <br>
-    <br>
-
-    <h1>Tags</h1>
-    <!-- <div style="display: flex; flex-wrap: wrap; margin: 0 auto">
-        {arrayTags.map((tag) => (
-            <p style="padding: .5em 1em; margin: 0.25em; font-size:1.15em; background-color:#F8FCFD; border: dotted 1px #a1a1a1; border-radius:.5em;" >
-            <a href={`/tags/${tag}`}>{tag}</a>
-            </p>
-        ))}
-    </div> -->
-            <h2> {tagname} - {tagcount} {tagcount>1 ? 'posts' : 'post'}</h2>
+	<body>
+        <h2> {tagname} - {tagcount} {tagcount>1 ? 'posts' : 'post'}</h2>
         {tagged.map(post => (
             <a href={post.url}>
             <div >
                 <h4>{post.frontmatter.title}</h4>
                 <p>{post.frontmatter.description}</p>
                 {post.frontmatter.tags.map(tag => (
-                <a href={`/tags/${tag}`}><p>{tag}</p></a>
+                <a href={`/post/tag-post/${tag}`}><span class="badge bg-secondary me-1 mb-2">{tag}</span></a>
                 ))}
             </div>
             </a>
         ))}
-    </main>
-    </body>
-</html>
+	</body>
+</html>    

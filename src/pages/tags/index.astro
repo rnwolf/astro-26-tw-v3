@@ -18,7 +18,7 @@ allPosts = postAry;
 
 const allTags = new Set()
   allPosts.map(post => {
-      post.frontmatter.tags && post.frontmatter.tags.map(tag => allTags.add(tag.toLowerCase()))
+      post.frontmatter.tags && post.frontmatter.tags.map(tag => allTags.add(tag))
   })
 const arrayTags = Array.from(allTags).sort()
 
